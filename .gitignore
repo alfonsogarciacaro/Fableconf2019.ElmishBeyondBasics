@@ -1,0 +1,13 @@
+packages/
+paket-files/
+paket.local
+.ionide/
+.vscode/
+
+node_modules/
+
+obj/
+bin/
+output/
+.fake/
+temp/
