@@ -43,4 +43,7 @@
     <PackageReference Include="Fulma.Extensions.Wikiki.PageLoader" Version="2.0.1" />
     <PackageReference Include="Thoth.Json" Version="3.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Fable.Elmish.Demetrix\Fable.Elmish.Demetrix.fsproj" />
+  </ItemGroup>
 </Project>
