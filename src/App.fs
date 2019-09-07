@@ -83,7 +83,29 @@ open Elmish.HMR
 // Init the first datas into the database
 Database.Init()
 
+// open Fable.Elmish.Demetrix
+
+// let authenticate (req: Authentication.Request) =
+//     promise {
+//         if req.Username.StartsWith("bar") then
+//             failwith "Invalid user"
+//         do! Promise.sleep 4000
+//         return req.Username + ":" + req.Password
+//     }
+
+// let testToken (token: Token) =
+//     promise {
+//         do! Promise.sleep 3000
+//         return token.StartsWith("foo")
+//     }
+
 Program.mkProgram init update root
 |> Program.toNavigable (parseHash Router.pageParser) urlUpdate
+// |> Authentication.Program.withAuthentication
+//     (fun model -> model.Token)
+//     (SetToken >> Navigable.UserMsg)
+//     authenticate
+//     testToken
+//     Authentication.defaultLoginView
 |> Program.withReactSynchronous "elmish-app"
 |> Program.run
