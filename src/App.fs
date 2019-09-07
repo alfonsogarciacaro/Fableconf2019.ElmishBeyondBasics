@@ -22,8 +22,7 @@ let private navbarEnd =
 let private navbarStart dispatch =
     Navbar.Start.div [ ]
         [ Navbar.Item.a [ Navbar.Item.Props [ OnClick (fun _ ->
-                                                        Router.QuestionPage.Index
-                                                        |> Router.Question
+                                                        Router.QuestionIndex
                                                         |> Router.modifyLocation) ] ]
             [ str "Home" ]
           Navbar.Item.div [ Navbar.Item.HasDropdown
@@ -63,7 +62,7 @@ let private navbarView isBurgerOpen dispatch =
 
 let private renderPage model dispatch =
     match model with
-    | { CurrentPage = Router.Question _
+    | { CurrentPage = _
         QuestionDispatcher = Some extractedModel } ->
         Question.Dispatcher.View.root model.Session extractedModel (QuestionDispatcherMsg >> dispatch)
     | _ ->
@@ -84,6 +83,6 @@ open Elmish.HMR
 Database.Init()
 
 Program.mkProgram init update root
-|> Program.toNavigable (parseHash Router.pageParser) urlUpdate
+|> Program.toNavigable Router.router.Parse urlUpdate
 |> Program.withReactSynchronous "elmish-app"
 |> Program.run

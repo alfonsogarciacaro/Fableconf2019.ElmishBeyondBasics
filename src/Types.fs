@@ -21,8 +21,7 @@ type Model =
 
     static member Empty =
         { CurrentPage =
-            Router.QuestionPage.Index
-            |> Router.Question
+            Router.QuestionIndex
           Session =
             let userId = 3
             match Database.GetUserById userId with

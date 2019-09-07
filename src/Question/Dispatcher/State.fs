@@ -4,20 +4,20 @@ open Elmish
 open Types
 open Fable.Core
 
-let init (questionPage: Router.QuestionPage) =
+let init (questionPage: Router.Page) =
     // Store current page
     let model = { Model.Empty with CurrentPage = questionPage }
     // Store model depending on the current page
     match questionPage with
-    | Router.QuestionPage.Index ->
+    | Router.QuestionIndex ->
         let (subModel, subCmd) = Question.Index.State.init ()
         { model with IndexModel = Some subModel }, Cmd.map IndexMsg subCmd
 
-    | Router.QuestionPage.Show id ->
+    | Router.QuestionShow id ->
         let (subModel, subCmd) = Question.Show.State.init id
         { model with ShowModel = Some subModel }, Cmd.map ShowMsg subCmd
 
-    | Router.QuestionPage.Create ->
+    | Router.QuestionCreate ->
         let (subModel, subCmd) = Question.Create.State.init ()
         { model with CreateModel = Some subModel }, Cmd.map CreateMsg subCmd
 

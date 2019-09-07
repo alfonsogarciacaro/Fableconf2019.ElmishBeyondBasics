@@ -49,7 +49,7 @@ let update (user : Database.User) msg (model: Model) =
                                  (CreateQuestionRes.Error >> CreateQuestionResult)
 
     | CreateQuestionResult (CreateQuestionRes.Success question) ->
-        { model with IsWaitingServer = false }, Router.newUrl (Router.QuestionPage.Show question.Id |> Router.Question)
+        { model with IsWaitingServer = false }, Router.newUrl (Router.QuestionShow question.Id)
 
     | CreateQuestionResult (CreateQuestionRes.Error error) ->
         Logger.debugfn "[Question.Show.State] Error when fetching details: \n %A" error

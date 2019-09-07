@@ -4,31 +4,17 @@ open Browser
 open Fable.React.Props
 open Elmish.Navigation
 open Elmish.UrlParser
-
-type QuestionPage =
-    | Index
-    | Show of int
-    | Create
+open Fable.Elmish.Demetrix
 
 type Page =
-    | Question of QuestionPage
     | Home
+    | QuestionIndex
+    | QuestionShow of int
+    | QuestionCreate
 
-let private toHash page =
-    match page with
-    | Question questionPage ->
-        match questionPage with
-        | Index -> "#question/index"
-        | Show id -> sprintf "#question/%i" id
-        | Create -> "#question/create"
-    | Home -> "#/"
+let router = Router.Router<Page>.Create()
 
-let pageParser: Parser<Page->Page,Page> =
-    oneOf [
-        map (QuestionPage.Index |> Question) (s "question" </> s "index")
-        map (QuestionPage.Show >> Question) (s "question" </> i32)
-        map (QuestionPage.Create |> Question) (s "question" </> s "create")
-        map (QuestionPage.Index |> Question) top ]
+let private toHash page = router.ToHash page
 
 let href route =
     Href (toHash route)

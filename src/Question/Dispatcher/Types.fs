@@ -1,13 +1,13 @@
 module Question.Dispatcher.Types
 
 type Model =
-    { CurrentPage : Router.QuestionPage
+    { CurrentPage : Router.Page
       IndexModel : Question.Index.Types.Model option
       ShowModel : Question.Show.Types.Model option
       CreateModel : Question.Create.Types.Model option }
 
     static member Empty =
-        { CurrentPage = Router.QuestionPage.Index
+        { CurrentPage = Router.QuestionIndex
           IndexModel = None
           ShowModel = None
           CreateModel = None }

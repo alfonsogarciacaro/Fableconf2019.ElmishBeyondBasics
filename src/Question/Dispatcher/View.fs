@@ -4,13 +4,13 @@ open Types
 
 let root user model dispatch =
     match model with
-    | { CurrentPage = Router.QuestionPage.Index
+    | { CurrentPage = Router.QuestionIndex
         IndexModel = Some extractedModel } -> Question.Index.View.root extractedModel (IndexMsg >> dispatch)
 
-    | { CurrentPage = Router.QuestionPage.Show _
+    | { CurrentPage = Router.QuestionShow _
         ShowModel = Some extractedModel } -> Question.Show.View.root user extractedModel (ShowMsg >> dispatch)
 
-    | { CurrentPage = Router.QuestionPage.Create
+    | { CurrentPage = Router.QuestionCreate
         CreateModel = Some extractedModel } -> Question.Create.View.root user extractedModel (CreateMsg >> dispatch)
 
     | _ ->

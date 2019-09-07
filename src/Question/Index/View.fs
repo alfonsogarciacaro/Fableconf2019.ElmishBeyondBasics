@@ -12,8 +12,7 @@ let private loaderView isLoading =
 
 let private questionsView (question : QuestionInfo) =
     let url =
-        Router.QuestionPage.Show
-        >> Router.Question
+        Router.QuestionShow
 
     Media.media [ ]
         [ Media.left [ ]
@@ -52,7 +51,7 @@ let root model _ =
                       Column.column [ ] [ ]
                       Column.column [ Column.Width (Screen.All, Column.IsNarrow) ]
                         [ Button.a [ Button.Color IsPrimary
-                                     Button.Props [ Router.href (Router.Question Router.Create) ] ]
+                                     Button.Props [ Router.href (Router.QuestionCreate) ] ]
                             [ str "Ask a new question" ] ] ] ]
               questionsList questions ]
     | None ->
