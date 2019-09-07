@@ -8,6 +8,7 @@ open Fable.Elmish.Demetrix
 
 type Page =
     | Home
+    | Greet of string option
     | QuestionIndex
     | QuestionShow of int
     | QuestionCreate

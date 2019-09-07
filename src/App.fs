@@ -1,6 +1,7 @@
 module App.View
 
 open Elmish
+open Fable.Core
 open Fable.React
 open Fable.React.Props
 open State
@@ -62,6 +63,10 @@ let private navbarView isBurgerOpen dispatch =
 
 let private renderPage model dispatch =
     match model with
+    | { CurrentPage = Router.Greet name } ->
+        let name = defaultArg name "World"
+        Heading.h1 [] [JS.decodeURI(name) |> sprintf "Hello %s!" |> str]
+
     | { CurrentPage = _
         QuestionDispatcher = Some extractedModel } ->
         Question.Dispatcher.View.root model.Session extractedModel (QuestionDispatcherMsg >> dispatch)

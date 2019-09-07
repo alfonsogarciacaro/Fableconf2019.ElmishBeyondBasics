@@ -19,6 +19,8 @@ let urlUpdate (result: Option<Router.Page>) model =
         | Router.Home ->
             let (subModel, subCmd) = Question.Dispatcher.State.init Router.QuestionIndex
             { model with QuestionDispatcher = Some subModel }, Cmd.map QuestionDispatcherMsg subCmd
+        | Router.Greet name ->
+            { model with CurrentPage = Router.Greet name }, Cmd.none
         | questionPage ->
             let (subModel, subCmd) = Question.Dispatcher.State.init questionPage
             { model with QuestionDispatcher = Some subModel }, Cmd.map QuestionDispatcherMsg subCmd
