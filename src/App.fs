@@ -9,6 +9,21 @@ open Types
 open Fulma
 open Fable.FontAwesome
 open Fable.FontAwesome.Free
+open Fable.Elmish.Demetrix
+
+let authenticate (req: Authentication.Request) =
+    promise {
+        if req.Username.StartsWith("bar") then
+            failwith "Invalid user"
+        do! Promise.sleep 4000
+        return req.Username + ":" + System.Guid.NewGuid().ToString()
+    }
+
+let testToken (token: Token) =
+    promise {
+        do! Promise.sleep 3000
+        return token.StartsWith("foo")
+    }
 
 let private navbarEnd =
     Navbar.End.div [ ]
@@ -89,5 +104,11 @@ Database.Init()
 
 Program.mkProgram init update root
 |> Program.toNavigable Router.router.Parse urlUpdate
+|> Authentication.Program.withAuthentication
+    (fun model -> model.Token)
+    (SetToken >> Navigable.UserMsg)
+    authenticate
+    testToken
+    Authentication.defaultLoginView
 |> Program.withReactSynchronous "elmish-app"
 |> Program.run

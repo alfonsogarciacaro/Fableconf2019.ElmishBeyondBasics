@@ -13,11 +13,14 @@ type Question =
       Description : string
       CreatedAt : string }
 
+type Token = string
+
 type Model =
     { CurrentPage : Router.Page
       Session : User
       QuestionDispatcher : Question.Dispatcher.Types.Model option
-      IsBurgerOpen : bool }
+      IsBurgerOpen : bool
+      Token: Token option }
 
     static member Empty =
         { CurrentPage =
@@ -28,9 +31,11 @@ type Model =
             | Some user -> user
             | None -> failwithf "User#%i not found" userId
           QuestionDispatcher = None
-          IsBurgerOpen = false }
+          IsBurgerOpen = false
+          Token = None }
 
 type Msg =
     | QuestionDispatcherMsg of Question.Dispatcher.Types.Msg
     | ResetDatabase
     | ToggleBurger
+    | SetToken of Token
